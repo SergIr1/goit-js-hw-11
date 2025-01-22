@@ -11,13 +11,16 @@
 
 <body>
   <main>
-    <span class="loader">loader</span>
     <form class="search-form js-search-form">
       <input class="search-form-input js-search-form-input" type="text" name="user_query"
         placeholder="Search images..." />
       <button class="search-form-btn" type="submit">Search</button>
     </form>
     <ul class="gallery js-gallery"></ul>
+
+    <div class="loader-backdrop is-hidden">
+      <div class="loader"></div>
+    </div>
   </main>
 
   <script type="module" src="./main.js"></script>
