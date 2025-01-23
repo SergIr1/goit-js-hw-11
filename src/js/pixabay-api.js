@@ -1,5 +1,15 @@
 export const fetchPhotosByQuery = searchQuery => {
-    return fetch(`https://pixabay.com/api/?key=48343538-15a5755b500219024f825f792&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true`)
+    const searchParams = new URLSearchParams({
+        key: "48343538-15a5755b500219024f825f792",
+        q: searchQuery,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+    });
+
+    console.log(searchParams.toString());
+
+    return fetch(`https://pixabay.com/api/?${searchParams.toString()}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);
