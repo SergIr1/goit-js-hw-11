@@ -5,10 +5,6 @@ import closeModalIcon from "./img/close-modal-btn.svg"
 import { createGalleryCardTemplate, showLoader, hideLoader } from "./js/render-functions.js";
 import { fetchPhotosByQuery } from "./js/pixabay-api.js"; 
 
-console.log(createGalleryCardTemplate);
-console.log(fetchPhotosByQuery);
-console.log(showLoader);
-console.log(hideLoader);
 
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector(".js-gallery");

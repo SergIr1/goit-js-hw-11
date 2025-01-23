@@ -7,8 +7,6 @@ export const fetchPhotosByQuery = searchQuery => {
         safesearch: true,
     });
 
-    console.log(searchParams.toString());
-
     return fetch(`https://pixabay.com/api/?${searchParams.toString()}`)
         .then(response => {
             if (!response.ok) {
