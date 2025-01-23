@@ -2,42 +2,17 @@ import SimpleLightbox from "simplelightbox";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import closeModalIcon from "./img/close-modal-btn.svg"
+import { createGalleryCardTemplate, showLoader, hideLoader } from "./js/render-functions.js";
+import { fetchPhotosByQuery } from "./js/pixabay-api.js"; 
+
+console.log(createGalleryCardTemplate);
+console.log(fetchPhotosByQuery);
+console.log(showLoader);
+console.log(hideLoader);
 
 const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector(".js-gallery");
-const loaderBackdrop = document.querySelector(".loader-backdrop");
 
-function showLoader() {
-    loaderBackdrop.classList.remove('is-hidden');
-}
-
-function hideLoader() {
-    loaderBackdrop.classList.add('is-hidden');
-}
-
-const createGalleryCardTemplate = imgInfo => {
-    return `<li class="gallery-card">
-                <a href="${imgInfo.largeImageURL}"><img class="gallery-img" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" width="${imgInfo.webformatWidth = 360}" height="${imgInfo.webformatHeight = 200}"></a>
-    <ul class="gallery-list">
-      <li class="gallery-item">
-        <h2 class="gallery-title">Likes</h2>
-        <p class="gallery-text">${imgInfo.likes}</p>
-      </li>
-      <li class="gallery-item">
-        <h2 class="gallery-title">Views</h2>
-        <p class="gallery-text">${imgInfo.views}</p>
-      </li>
-      <li class="gallery-item">
-        <h2 class="gallery-title">Comments</h2>
-        <p class="gallery-text">${imgInfo.comments}</p>
-      </li>
-      <li class="gallery-item">
-      <h2 class="gallery-title">Downloads</h2>
-      <p class="gallery-text">${imgInfo.downloads}</p>
-      </li>
-    </ul>         
-                </li>`;
-};
 
 let gallery = new SimpleLightbox('.js-gallery a', { captionsData: 'alt', captionDelay: 250 });
 
@@ -59,13 +34,7 @@ const onSearchFormSubmit = event => {
 
     showLoader();
 
-    fetch(`https://pixabay.com/api/?key=48343538-15a5755b500219024f825f792&q=${searchQuery}&image_type=photo&orientation=horizontal&safesearch=true`).then(response => {
-    if (!response.ok) {
-        throw new Error(response.status);
-        };
-
-    return response.json();
-    }).then(data => {
+        fetchPhotosByQuery(searchQuery).then(data => {
 
         if (data.total === 0) {
             iziToast.error({
@@ -98,7 +67,7 @@ const onSearchFormSubmit = event => {
         // let gallery = new SimpleLightbox('.js-gallery a', { captionsData: 'alt', captionDelay: 250 });
 
         gallery.refresh();
-        
+
 }).catch(err => {
     if (err.message === "404") {
         console.error('Error:', err.message);
