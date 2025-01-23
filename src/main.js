@@ -1,9 +1,9 @@
 import SimpleLightbox from "simplelightbox";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import closeModalIcon from "./img/close-modal-btn.svg"
-import { createGalleryCardTemplate, showLoader, hideLoader } from "./js/render-functions.js";
-import { fetchPhotosByQuery } from "./js/pixabay-api.js"; 
+import closeModalIcon from "/img/close-modal-btn.svg"
+import { createGalleryCardTemplate, showLoader, hideLoader } from "/js/render-functions.js";
+import { fetchPhotosByQuery } from "/js/pixabay-api.js"; 
 
 
 const searchFormEl = document.querySelector('.js-search-form');
